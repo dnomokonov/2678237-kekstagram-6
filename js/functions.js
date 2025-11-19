@@ -11,7 +11,7 @@ function extractDigits(str) {
   let result = '';
   str = str.toString();
 
-  for (let char of str) {
+  for (const char of str) {
     if (!isNaN(parseInt(char, 10))) {
       result += char;
     }
