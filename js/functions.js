@@ -16,6 +16,6 @@ function extractDigits(str) {
       result += char;
     }
   }
-  result = parseInt(result, 10) ? result : NaN;
+  result = parseInt(result, 10);
   return result;
 }
