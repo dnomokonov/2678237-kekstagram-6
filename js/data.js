@@ -1,41 +1,11 @@
-import { getRandom, generateComments } from './util.js';
+import { getRandom } from './util.js';
+import { NAMES, MESSAGES, DESCRIPTION } from './constants.js';
 
-const NAMES = [
-  'Александр',
-  'Дмитрий',
-  'Максим',
-  'Артём',
-  'Иван',
-  'Анна',
-  'Елена',
-  'Ольга',
-  'Наталья',
-  'Светлана'
-];
+const minAvatarIndex = 1;
+const maxAvatarIndex = 6;
 
-const MESSAGES = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-
-const DESCRIPTION = [
-  'Золотой час над заснеженными горами',
-  'Утренняя дымка в осеннем лесу',
-  'Минималистичный городской пейзаж на рассвете',
-  'Портрет в чёрно-белом стиле с мягким боке',
-  'Девушка в красном платье на фоне заката',
-  'Капли дождя на стекле крупным планом',
-  'Ночная съёмка звёздного неба с млечным путём',
-  'Уличная фотография: отражение в луже',
-  'Тёплый свет ламп в уютном кафе',
-  'Макросъёмка глаза с отражением города',
-  'Лавандовые поля на закате, Прованс',
-  'Дрон-съёмка: бесконечные волны океана'
-];
+const minLikes = 15;
+const maxLikes = 200;
 
 function generatePosts(countPosts) {
   const posts = [];
@@ -44,13 +14,45 @@ function generatePosts(countPosts) {
       id: i,
       url: `photos/${i}.jpg`,
       description: DESCRIPTION[getRandom(0, DESCRIPTION.length)],
-      likes: getRandom(15, 200),
+      likes: getRandom(minLikes, maxLikes),
       comments: generateComments(NAMES, MESSAGES),
     };
     posts.push(post);
   }
 
   return posts;
+}
+
+function generateComments(names, messages, count = 30) {
+  const comments = [];
+  const countComments = getRandom(0, count);
+  for (let i = 0; i < countComments; i++) {
+    const randomAvatarIndex = getRandom(minAvatarIndex, maxAvatarIndex);
+    const comment = {
+      id: i,
+      avatar: `img/avatar-${randomAvatarIndex}.svg`,
+      message: getRandomMessage(messages),
+      name: getRandomName(names),
+    };
+    comments.push(comment);
+  }
+
+  return comments;
+}
+
+function getRandomName(names) {
+  const randomNameIndex = Math.floor(Math.random() * names.length);
+  return names[randomNameIndex];
+}
+
+function getRandomMessage(messages, count = 2) {
+  const countMessage = Math.floor(Math.random() * count) + 1;
+  let message = '';
+  for (let i = 0; i < countMessage; i++) {
+    const randomMessageIndex = getRandom(0, messages.length);
+    message += `${messages[randomMessageIndex]}`;
+  }
+  return message;
 }
 
 export { generatePosts };
