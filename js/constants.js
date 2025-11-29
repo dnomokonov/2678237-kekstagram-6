@@ -1,3 +1,12 @@
+const COUNT_POSTS = 25;
+const COUNT_COMMENTS = 30;
+
+const MIN_AVATAR_INDEX = 1;
+const MAX_AVATAR_INDEX = 6;
+
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
+
 const NAMES = [
   'Александр',
   'Дмитрий',
@@ -35,4 +44,14 @@ const DESCRIPTION = [
   'Дрон-съёмка: бесконечные волны океана'
 ];
 
-export { NAMES, MESSAGES, DESCRIPTION };
+export {
+  COUNT_POSTS,
+  COUNT_COMMENTS,
+  MIN_AVATAR_INDEX,
+  MAX_AVATAR_INDEX,
+  MIN_LIKES,
+  MAX_LIKES,
+  NAMES,
+  MESSAGES,
+  DESCRIPTION
+};

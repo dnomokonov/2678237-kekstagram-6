@@ -1,11 +1,14 @@
 import { getRandom, getRandomName, getRandomMessage } from './util.js';
-import { NAMES, MESSAGES, DESCRIPTION } from './constants.js';
-
-const MIN_AVATAR_INDEX = 1;
-const MAX_AVATAR_INDEX = 6;
-
-const MIN_LIKES = 15;
-const MAX_LIKES = 200;
+import {
+  MIN_LIKES,
+  MAX_LIKES,
+  COUNT_COMMENTS,
+  NAMES,
+  MESSAGES,
+  DESCRIPTION,
+  MIN_AVATAR_INDEX,
+  MAX_AVATAR_INDEX
+} from './constants.js';
 
 function generatePosts(countPosts) {
   const posts = [];
@@ -15,7 +18,7 @@ function generatePosts(countPosts) {
       url: `photos/${i}.jpg`,
       description: DESCRIPTION[getRandom(0, DESCRIPTION.length)],
       likes: getRandom(MIN_LIKES, MAX_LIKES),
-      comments: generateComments(NAMES, MESSAGES),
+      comments: generateComments(NAMES, MESSAGES, COUNT_COMMENTS),
     };
     posts.push(post);
   }
@@ -23,7 +26,7 @@ function generatePosts(countPosts) {
   return posts;
 }
 
-function generateComments(names, messages, count = 30) {
+function generateComments(names, messages, count) {
   const comments = [];
   const countComments = getRandom(0, count);
   for (let i = 0; i < countComments; i++) {
