@@ -1,11 +1,11 @@
-import { getRandom } from './util.js';
+import { getRandom, getRandomName, getRandomMessage } from './util.js';
 import { NAMES, MESSAGES, DESCRIPTION } from './constants.js';
 
-const minAvatarIndex = 1;
-const maxAvatarIndex = 6;
+const MIN_AVATAR_INDEX = 1;
+const MAX_AVATAR_INDEX = 6;
 
-const minLikes = 15;
-const maxLikes = 200;
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
 
 function generatePosts(countPosts) {
   const posts = [];
@@ -14,7 +14,7 @@ function generatePosts(countPosts) {
       id: i,
       url: `photos/${i}.jpg`,
       description: DESCRIPTION[getRandom(0, DESCRIPTION.length)],
-      likes: getRandom(minLikes, maxLikes),
+      likes: getRandom(MIN_LIKES, MAX_LIKES),
       comments: generateComments(NAMES, MESSAGES),
     };
     posts.push(post);
@@ -27,7 +27,7 @@ function generateComments(names, messages, count = 30) {
   const comments = [];
   const countComments = getRandom(0, count);
   for (let i = 0; i < countComments; i++) {
-    const randomAvatarIndex = getRandom(minAvatarIndex, maxAvatarIndex);
+    const randomAvatarIndex = getRandom(MIN_AVATAR_INDEX, MAX_AVATAR_INDEX);
     const comment = {
       id: i,
       avatar: `img/avatar-${randomAvatarIndex}.svg`,
@@ -38,21 +38,6 @@ function generateComments(names, messages, count = 30) {
   }
 
   return comments;
-}
-
-function getRandomName(names) {
-  const randomNameIndex = Math.floor(Math.random() * names.length);
-  return names[randomNameIndex];
-}
-
-function getRandomMessage(messages, count = 2) {
-  const countMessage = Math.floor(Math.random() * count) + 1;
-  let message = '';
-  for (let i = 0; i < countMessage; i++) {
-    const randomMessageIndex = getRandom(0, messages.length);
-    message += `${messages[randomMessageIndex]}`;
-  }
-  return message;
 }
 
 export { generatePosts };
