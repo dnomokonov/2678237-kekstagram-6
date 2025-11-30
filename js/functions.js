@@ -33,3 +33,5 @@ function checkMeetingDuration(workStart, workEnd, meetingStart, meetingDuration)
 
   return meetingTimeStart >= workTimeStart && meetingTimeEnd <= workTimeEnd;
 }
+
+export { checkStrLen, isPalindrome, extractDigits, checkMeetingDuration };
