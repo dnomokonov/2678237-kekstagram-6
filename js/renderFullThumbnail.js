@@ -44,20 +44,6 @@ const renderFullThumbnail = function (post) {
   const bodyDocument = document.querySelector('body');
   const comments = post.comments;
 
-  const closeModal = () => {
-    bigPicture.classList.add('hidden');
-    bodyDocument.classList.remove('modal-open');
-    document.removeEventListener('keydown', closeModal);
-    closeButtonPicture.removeEventListener('click', closeModal);
-  };
-
-  const onKeyDown = (evt) => {
-    evt.preventDefault();
-    if (evt.key === 'Escape') {
-      closeModal();
-    }
-  };
-
   bodyDocument.classList.add('modal-open');
   bigPicture.classList.remove('hidden');
 
@@ -69,8 +55,18 @@ const renderFullThumbnail = function (post) {
 
   viewComments(bigPicture, comments);
 
-  document.addEventListener('keydown', onKeyDown);
-  closeButtonPicture.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (evt) => {
+    evt.preventDefault();
+    if (evt.key === 'Escape') {
+      bigPicture.classList.add('hidden');
+      bodyDocument.classList.remove('modal-open');
+    }
+  }, { once: true });
+
+  closeButtonPicture.addEventListener('click', () => {
+    bigPicture.classList.add('hidden');
+    bodyDocument.classList.remove('modal-open');
+  }, { once: true });
 };
 
 export { renderFullThumbnail };
