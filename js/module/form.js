@@ -1,4 +1,4 @@
-import validationForm from './validate.js';
+import { pristine } from './validateForm.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
 const uploadFile = formUploadImg.querySelector('#upload-file');
@@ -53,19 +53,6 @@ const changeInputImage = (evt) => {
 };
 
 const initForm = () => {
-  const hashtagsField = formUploadImg.querySelector('.text__hashtags');
-  const descriptionField = formUploadImg.querySelector('.text__description');
-  const pristine = new Pristine(formUploadImg, {
-    classTo: 'img-upload__field-wrapper',
-    errorClass: 'img-upload__field--invalid',
-    successClass: 'img-upload__field--valid',
-    errorTextParent: 'img-upload__field-wrapper',
-    errorTextTag: 'span',
-    errorTextClass: 'form__error'
-  });
-
-  validationForm(pristine, hashtagsField, descriptionField);
-
   uploadFile.addEventListener('change', changeInputImage);
   formUploadImg.addEventListener('submit', (evt) => {
     const isValid = pristine.validate();
