@@ -44,6 +44,8 @@ const DESCRIPTION = [
   'Дрон-съёмка: бесконечные волны океана'
 ];
 
+const MAX_VIEW_COMMENTS = 5;
+
 export {
   COUNT_POSTS,
   COUNT_COMMENTS,
@@ -53,6 +55,7 @@ export {
   MAX_LIKES,
   NAMES,
   MESSAGES,
-  DESCRIPTION
+  DESCRIPTION,
+  MAX_VIEW_COMMENTS
 };
 
