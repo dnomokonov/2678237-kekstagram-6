@@ -102,7 +102,9 @@ const renderFullThumbnail = function (post) {
   viewComments(bigPicture, comments, showCountComments);
 
   commentsLoaderButton.addEventListener('click', handleLoadMoreComments);
-  document.addEventListener('keydown', onKeyDown);
+  document.addEventListener('keydown', (evt) => {
+    onKeyDown(evt, closeModal);
+  });
   closeButtonPicture.addEventListener('click', closeModal);
 };
 
