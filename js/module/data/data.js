@@ -1,4 +1,4 @@
-import { getRandom, getRandomName, getRandomMessage } from '../utils/util.js';
+import { getRandom, getRandomName, getRandomMessage } from '../../utils/util.js';
 import {
   MIN_LIKES,
   MAX_LIKES,

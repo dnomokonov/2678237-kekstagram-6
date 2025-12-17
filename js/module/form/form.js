@@ -1,4 +1,5 @@
 import { pristine } from './validateForm.js';
+import { openImageEditor } from '../imageEditor/imageEditor.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
 const uploadFile = formUploadImg.querySelector('#upload-file');
@@ -7,8 +8,21 @@ const modalWindow = document.querySelector('.img-upload__overlay');
 const closeModalBtn = modalWindow.querySelector('.img-upload__cancel');
 const bodyDocument = document.querySelector('body');
 
+const isValidSubmit = (evt) => {
+  const isValid = pristine.validate();
+
+  if (!isValid) {
+    evt.preventDefault();
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю...';
+};
+
 const closeModal = () => {
   uploadFile.value = '';
+  formUploadImg.removeEventListener('submit', isValidSubmit);
   modalWindow.classList.add('hidden');
   bodyDocument.classList.remove('modal-open');
   closeModalBtn.removeEventListener('click', closeModal);
@@ -28,19 +42,16 @@ const onKeyDown = (evt) => {
   }
 };
 
-const openImageEditor = (image) => {
-  const imgUploadPreview = formUploadImg.querySelector('.img-upload__preview');
-  const imgPreview = imgUploadPreview.querySelector('img');
-
+const openModal = () => {
   modalWindow.classList.remove('hidden');
   bodyDocument.classList.add('modal-open');
 
-  imgPreview.src = image;
-
   closeModalBtn.addEventListener('click', closeModal);
   bodyDocument.addEventListener('keydown', (evt) => {
-    onKeyDown(evt, closeModal);
+    onKeyDown(evt);
   });
+
+  formUploadImg.addEventListener('submit', isValidSubmit);
 };
 
 const changeInputImage = (evt) => {
@@ -48,23 +59,13 @@ const changeInputImage = (evt) => {
 
   if (file && file.type.startsWith('image/')) {
     const image = URL.createObjectURL(file);
-    openImageEditor(image);
+    openModal();
+    openImageEditor(formUploadImg, image);
   }
 };
 
 const initForm = () => {
   uploadFile.addEventListener('change', changeInputImage);
-  formUploadImg.addEventListener('submit', (evt) => {
-    const isValid = pristine.validate();
-
-    if (!isValid) {
-      evt.preventDefault();
-      return;
-    }
-
-    submitButton.disabled = true;
-    submitButton.textContent = 'Отправляю...';
-  });
 };
 
 export { initForm };

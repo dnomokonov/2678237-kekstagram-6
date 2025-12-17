@@ -1,4 +1,4 @@
-import { MAX_LENGTH_DESCRIPTION, MAX_HASHTAGS, MAX_TAG_LENGTH, HASHTAG_REGEX } from './constants.js';
+import { MAX_LENGTH_DESCRIPTION, MAX_HASHTAGS, MAX_TAG_LENGTH, HASHTAG_REGEX } from '../data/constants.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
 const hashtagsField = formUploadImg.querySelector('.text__hashtags');
@@ -13,10 +13,7 @@ const pristine = new Pristine(formUploadImg, {
   errorTextClass: 'form__error'
 });
 
-const getHashtags = (value) => {
-  const hashtags = value.trim().split(/\s+/);
-  return hashtags.map((tag) => tag.trim());
-};
+const getHashtags = (value) => value.trim().split(/\s+/);
 
 const validateHashtagsCount = (value) => {
   if (!value.trim()) {
@@ -44,7 +41,7 @@ const validateHashtagsUnique = (value) => {
   return isUniqueHashtag;
 };
 
-const validateHashtags = (value) => {
+const validateHashtagsFormat = (value) => {
   if (!value.trim()) {
     return true;
   }
@@ -66,7 +63,7 @@ const validateDescription = (value) => value.length <= MAX_LENGTH_DESCRIPTION;
 
 pristine.addValidator(
   hashtagsField,
-  validateHashtags,
+  validateHashtagsFormat,
   'Неверный формат хэш-тегов',
   1,
   true
