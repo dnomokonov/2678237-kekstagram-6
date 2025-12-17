@@ -1,4 +1,4 @@
-import {MAX_VIEW_COMMENTS} from './constants.js';
+import {MAX_VIEW_COMMENTS} from '../data/constants.js';
 
 const createComment = function (comment) {
   const commentBlock = document.createElement('li');
@@ -102,7 +102,9 @@ const renderFullThumbnail = function (post) {
   viewComments(bigPicture, comments, showCountComments);
 
   commentsLoaderButton.addEventListener('click', handleLoadMoreComments);
-  document.addEventListener('keydown', onKeyDown);
+  document.addEventListener('keydown', (evt) => {
+    onKeyDown(evt);
+  });
   closeButtonPicture.addEventListener('click', closeModal);
 };
 
