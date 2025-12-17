@@ -50,6 +50,56 @@ const MAX_LENGTH_DESCRIPTION = 140;
 const MAX_HASHTAGS = 5;
 const MAX_TAG_LENGTH = 20;
 const HASHTAG_REGEX = /^#[A-Za-zА-Яа-яЁё0-9]+$/;
+const MIN_SCALE_PHOTO = 25;
+const MAX_SCALE_PHOTO = 100;
+const STEP_SCALE_PHOTO = 25;
+const DEFAULT_SCALE_PHOTO = 100;
+const DEFAULT_IMAGE_FORM = 'img/upload-default-image.jpg';
+
+const EFFECTS = {
+  none: {
+    filter: 'none',
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: ''
+  },
+  chrome: {
+    filter: 'grayscale',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: ''
+  },
+  sepia: {
+    filter: 'sepia',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    unit: ''
+  },
+  marvin: {
+    filter: 'invert',
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: '%'
+  },
+  phobos: {
+    filter: 'blur',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    unit: 'px'
+  },
+  heat: {
+    filter: 'brightness',
+    min: 1,
+    max: 3,
+    step: 0.1,
+    unit: ''
+  }
+};
 
 export {
   COUNT_POSTS,
@@ -65,6 +115,12 @@ export {
   MAX_LENGTH_DESCRIPTION,
   MAX_HASHTAGS,
   MAX_TAG_LENGTH,
-  HASHTAG_REGEX
+  HASHTAG_REGEX,
+  MIN_SCALE_PHOTO,
+  MAX_SCALE_PHOTO,
+  STEP_SCALE_PHOTO,
+  DEFAULT_SCALE_PHOTO,
+  DEFAULT_IMAGE_FORM,
+  EFFECTS
 };
 
