@@ -5,7 +5,8 @@ import {
   DEFAULT_SCALE_PHOTO, EFFECTS,
   MAX_SCALE_PHOTO,
   MIN_SCALE_PHOTO,
-  STEP_SCALE_PHOTO
+  STEP_SCALE_PHOTO,
+  DEFAULT_CFG_UISLIDER
 } from '../data/constants.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
@@ -24,14 +25,7 @@ const modalWindow = document.querySelector('.img-upload__overlay');
 const closeModalBtn = modalWindow.querySelector('.img-upload__cancel');
 const bodyDocument = document.querySelector('body');
 
-noUiSlider.create(stepSlider, {
-  start: EFFECTS.none.min,
-  step: EFFECTS.none.step,
-  range: {
-    'min': EFFECTS.none.min,
-    'max': EFFECTS.none.max,
-  }
-});
+noUiSlider.create(stepSlider, DEFAULT_CFG_UISLIDER);
 
 const isValidSubmit = (evt) => {
   const isValid = pristine.validate();
@@ -57,6 +51,9 @@ const changeImageScale = (percent) => {
   scaleControlValue.value = `${newScale}%`;
   applyImageScale(newScale);
 };
+
+const scaleSmallerHandler = () => changeImageScale(-STEP_SCALE_PHOTO);
+const scaleBiggerHandler = () => changeImageScale(STEP_SCALE_PHOTO);
 
 const updateUiSlider = (cfgEffect) => {
   stepSlider.noUiSlider.updateOptions({
@@ -93,6 +90,7 @@ const changeImageEffects = (evt) => {
 const resetForm = () => {
   pristine.reset();
   formUploadImg.reset();
+  stepSlider.noUiSlider.updateOptions(DEFAULT_CFG_UISLIDER);
   setPreviewImage(DEFAULT_IMAGE_FORM);
   changeImageScale(DEFAULT_SCALE_PHOTO);
 };
@@ -102,8 +100,8 @@ const closeModal = () => {
   bodyDocument.classList.remove('modal-open');
 
   formUploadImg.removeEventListener('submit', isValidSubmit);
-  scaleSmallerBtn.removeEventListener('click', changeImageScale);
-  scaleBiggerBtn.removeEventListener('click', changeImageScale);
+  scaleSmallerBtn.removeEventListener('click', scaleSmallerHandler);
+  scaleBiggerBtn.removeEventListener('click', scaleBiggerHandler);
   closeModalBtn.removeEventListener('click', closeModal);
   bodyDocument.removeEventListener('keydown', closeModal);
 
@@ -145,13 +143,9 @@ const openModal = () => {
     onKeyDown(evt);
   });
 
-  scaleSmallerBtn.addEventListener('click', () => {
-    changeImageScale(-STEP_SCALE_PHOTO);
-  });
+  scaleSmallerBtn.addEventListener('click', scaleSmallerHandler);
 
-  scaleBiggerBtn.addEventListener('click', () => {
-    changeImageScale(STEP_SCALE_PHOTO);
-  });
+  scaleBiggerBtn.addEventListener('click', scaleBiggerHandler);
 
   effectsList.addEventListener('change', changeImageEffects);
 

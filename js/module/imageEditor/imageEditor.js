@@ -27,7 +27,12 @@ const setEffectImage = (effect) => {
   const filterValue = chooseEffect.max;
 
   currentEffect = chooseEffect;
-  imgPreview.style.filter = `${filterType}(${filterValue}${filterUnit})`;
+
+  if (effect === 'none') {
+    imgPreview.style.filter = 'none';
+  } else {
+    imgPreview.style.filter = `${filterType}(${filterValue}${filterUnit})`;
+  }
 };
 
 const updateEffectImage = (value) => {

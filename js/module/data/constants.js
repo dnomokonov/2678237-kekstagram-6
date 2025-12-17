@@ -101,6 +101,15 @@ const EFFECTS = {
   }
 };
 
+const DEFAULT_CFG_UISLIDER = {
+  start: EFFECTS.none.min,
+  step: EFFECTS.none.step,
+  range: {
+    'min': EFFECTS.none.min,
+    'max': EFFECTS.none.max,
+  }
+};
+
 export {
   COUNT_POSTS,
   COUNT_COMMENTS,
@@ -121,6 +130,7 @@ export {
   STEP_SCALE_PHOTO,
   DEFAULT_SCALE_PHOTO,
   DEFAULT_IMAGE_FORM,
-  EFFECTS
+  EFFECTS,
+  DEFAULT_CFG_UISLIDER
 };
 
