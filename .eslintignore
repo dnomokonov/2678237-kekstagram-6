@@ -1,2 +1,3 @@
 webpack.config.js
 js/lib/pristine.min.js
+css/nouislider.min.css
