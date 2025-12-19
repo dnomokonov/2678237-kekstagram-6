@@ -1,7 +1,7 @@
-import { generatePosts } from './module/data/data.js';
-import { COUNT_POSTS } from './module/data/constants.js';
-import { initGallery } from './module/gallery/gallery.js';
-import { initForm } from './module/form/form.js';
+import { generatePosts } from './modules/data/data.js';
+import { COUNT_POSTS } from './modules/data/constants.js';
+import { initGallery } from './modules/gallery/gallery.js';
+import { initForm } from './modules/form/form.js';
 
 const posts = generatePosts(COUNT_POSTS);
 
