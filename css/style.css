@@ -1195,7 +1195,7 @@ main {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 2;
 
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -1230,18 +1230,15 @@ main {
 
 .error__title {
   position: relative;
-
-  margin: 0;
-  margin-bottom: 50px;
-
+  margin: 0 0 40px 0;
   font-size: 32px;
+  line-height: 35px;
 }
 
 .success__title {
-  margin: 0;
-  margin-bottom: 50px;
-
+  margin: 0 0 40px 0;
   font-size: 32px;
+  line-height: 35px;
 }
 
 .error__title::before {
@@ -1299,6 +1296,7 @@ main {
   width: 300px;
   height: 10px;
 
+  overflow: hidden;
   background-color: #8a7d2d;
 
   -webkit-transform: translateX(-50%);
@@ -1320,8 +1318,26 @@ main {
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
+
+  animation: message-loading 1.2s ease infinite;
 }
 
+@keyframes message-loading {
+  0% {
+    transform: translateX(-150px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+}
 
 /* Адаптивности чуток
    ========================================================================== */
@@ -1394,4 +1410,51 @@ main {
 
 .hidden {
   display: none;
+}
+
+.alert {
+  min-width: 200px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -40px);
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  font-size: 16px;
+  padding: 10px;
+
+  border-radius: 6px;
+  color: white;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.alert p{
+  padding: 0;
+  margin: 0;
+}
+
+.alert-show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.alert--error {
+  background-color: #f95a59;
+}
+
+.alert--success {
+  background-color: #3fcd4c;
+}
+
+.alert--info {
+  background-color: #3e97fd;
 }

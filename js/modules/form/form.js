@@ -8,10 +8,12 @@ import {
   STEP_SCALE_PHOTO,
   DEFAULT_CFG_UISLIDER
 } from '../data/constants.js';
+import {sendForm} from '../../api/dataApi.js';
+import {hideLoadingMessage, showFailureMessage, showLoadingMessage, showSuccessMessage} from '../notify/message.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
 const uploadFile = formUploadImg.querySelector('#upload-file');
-const submitButton = formUploadImg.querySelector('.img-upload__submit');
+const uploadSubmit = formUploadImg.querySelector('#upload-submit');
 
 const scaleSmallerBtn = formUploadImg.querySelector('.scale__control--smaller');
 const scaleBiggerBtn = formUploadImg.querySelector('.scale__control--bigger');
@@ -26,18 +28,6 @@ const closeModalBtn = modalWindow.querySelector('.img-upload__cancel');
 const bodyDocument = document.querySelector('body');
 
 noUiSlider.create(stepSlider, DEFAULT_CFG_UISLIDER);
-
-const isValidSubmit = (evt) => {
-  const isValid = pristine.validate();
-
-  if (!isValid) {
-    evt.preventDefault();
-    return;
-  }
-
-  submitButton.disabled = true;
-  submitButton.textContent = 'Отправляю...';
-};
 
 const changeImageScale = (percent) => {
   const currentScale = parseInt(scaleControlValue.value, 10);
@@ -99,13 +89,39 @@ const closeModal = () => {
   modalWindow.classList.add('hidden');
   bodyDocument.classList.remove('modal-open');
 
-  formUploadImg.removeEventListener('submit', isValidSubmit);
   scaleSmallerBtn.removeEventListener('click', scaleSmallerHandler);
   scaleBiggerBtn.removeEventListener('click', scaleBiggerHandler);
   closeModalBtn.removeEventListener('click', closeModal);
   bodyDocument.removeEventListener('keydown', closeModal);
 
   resetForm();
+};
+
+const setSubmitState = (isSubmit) => {
+  uploadSubmit.disabled = isSubmit;
+  uploadSubmit.textContent = isSubmit ? 'Публикация...' : 'Опубликовать';
+};
+
+const submitForm = async (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+
+  if (isValid) {
+    showLoadingMessage();
+    setSubmitState(true);
+
+    try {
+      const formData = new FormData(evt.target);
+      await sendForm(formData);
+      showSuccessMessage('Данные успешно отправлены!');
+      closeModal();
+    } catch (e) {
+      showFailureMessage(`${e.message}`);
+    } finally {
+      hideLoadingMessage();
+      setSubmitState(false);
+    }
+  }
 };
 
 const onKeyDown = (evt) => {
@@ -139,9 +155,7 @@ const openModal = () => {
   });
 
   closeModalBtn.addEventListener('click', closeModal);
-  bodyDocument.addEventListener('keydown', (evt) => {
-    onKeyDown(evt);
-  });
+  bodyDocument.addEventListener('keydown', onKeyDown);
 
   scaleSmallerBtn.addEventListener('click', scaleSmallerHandler);
 
@@ -149,7 +163,7 @@ const openModal = () => {
 
   effectsList.addEventListener('change', changeImageEffects);
 
-  formUploadImg.addEventListener('submit', isValidSubmit);
+  formUploadImg.addEventListener('submit', submitForm);
 };
 
 const changeInputImage = (evt) => {
