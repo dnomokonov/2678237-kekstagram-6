@@ -101,7 +101,7 @@ const EFFECTS = {
   }
 };
 
-const DEFAULT_CFG_UISLIDER = {
+const DEFAULT_CONFIG_UISLIDER = {
   start: EFFECTS.none.min,
   step: EFFECTS.none.step,
   range: {
@@ -133,7 +133,7 @@ export {
   DEFAULT_SCALE_PHOTO,
   DEFAULT_IMAGE_FORM,
   EFFECTS,
-  DEFAULT_CFG_UISLIDER,
+  DEFAULT_CONFIG_UISLIDER,
   TIMEOUT_ANIMATION
 };
 
