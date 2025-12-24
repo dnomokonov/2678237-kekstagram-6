@@ -8,8 +8,14 @@ const initFullThumbnail = function(thumbnail, post) {
   });
 };
 
-const initGallery = function(posts) {
+const clearGallery = () => {
+  document.querySelectorAll('.picture:not(.img-filters__button)').forEach(
+    (picture) => picture.remove()
+  );
+};
+
+const renderGallery = function(posts) {
   renderThumbnails(posts, initFullThumbnail);
 };
 
-export { initGallery };
+export { renderGallery, clearGallery };
