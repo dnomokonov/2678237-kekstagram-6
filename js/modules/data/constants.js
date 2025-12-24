@@ -112,6 +112,14 @@ const DEFAULT_CONFIG_UISLIDER = {
 
 const TIMEOUT_ANIMATION = 2000;
 
+const TYPE_FILTER = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
+};
+
+const COUNT_RANDOM_POSTS = 10;
+
 export {
   COUNT_POSTS,
   COUNT_COMMENTS,
@@ -134,6 +142,8 @@ export {
   DEFAULT_IMAGE_FORM,
   EFFECTS,
   DEFAULT_CONFIG_UISLIDER,
-  TIMEOUT_ANIMATION
+  TIMEOUT_ANIMATION,
+  TYPE_FILTER,
+  COUNT_RANDOM_POSTS
 };
 

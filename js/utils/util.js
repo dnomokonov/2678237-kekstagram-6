@@ -17,4 +17,15 @@ function getRandomMessage(messages, count = 2) {
   return message;
 }
 
-export { getRandom, getRandomName, getRandomMessage };
+const sortingPost = (postA, postB) => postB.comments.length - postA.comments.length;
+
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { getRandom, getRandomName, getRandomMessage, sortingPost, debounce };

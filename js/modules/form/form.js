@@ -64,7 +64,6 @@ const resetForm = () => {
   formUploadImg.reset();
   stepSlider.noUiSlider.updateOptions(DEFAULT_CONFIG_UISLIDER);
   imageEditor.setPreviewImage(DEFAULT_IMAGE_FORM);
-  imageEditor = null;
   scaleController.destroy();
 };
 
