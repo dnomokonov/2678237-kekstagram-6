@@ -13,8 +13,9 @@ const formUploadImg = document.querySelector('#upload-select-image');
 const uploadFile = formUploadImg.querySelector('#upload-file');
 const uploadSubmit = formUploadImg.querySelector('#upload-submit');
 
-const stepSlider = formUploadImg.querySelector('.img-upload__effect-level');
-const stepSliderInput = stepSlider.querySelector('.effect-level__value');
+const effectLevelField = formUploadImg.querySelector('.img-upload__effect-level');
+const stepSlider = effectLevelField.querySelector('.effect-level__slider');
+const stepSliderInput = effectLevelField.querySelector('.effect-level__value');
 const effectsList = formUploadImg.querySelector('.effects__list');
 
 const modalWindow = document.querySelector('.img-upload__overlay');
@@ -48,9 +49,9 @@ const changeImageEffects = (evt) => {
     }
 
     if (effectValue === 'none') {
-      stepSlider.classList.add('hidden');
+      effectLevelField.classList.add('hidden');
     } else {
-      stepSlider.classList.remove('hidden');
+      effectLevelField.classList.remove('hidden');
     }
 
     updateUiSlider(EFFECTS[effectValue]);
@@ -126,11 +127,11 @@ const openModal = () => {
   const defaultEffect = effectsList.querySelector('input[type="radio"]:checked');
 
   if (defaultEffect.value === 'none') {
-    stepSlider.classList.add('hidden');
+    effectLevelField.classList.add('hidden');
   }
 
   stepSlider.noUiSlider.on('update', (values, handle) => {
-    stepSliderInput.value = values[handle];
+    stepSliderInput.value = Number(values[handle]);
     imageEditor.updateEffectImage(values[handle]);
   });
 

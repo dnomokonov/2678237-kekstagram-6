@@ -1,10 +1,15 @@
 import ErrorApi from './errorApi.js';
 
-const SERVER_URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
+const baseApiUrl = 'https://29.javascript.htmlacademy.pro/kekstagram';
+
+const APIRoute = {
+  GET: `${baseApiUrl}/data`,
+  POST: `${baseApiUrl}/`,
+};
 
 const getPosts = async () => {
   try {
-    const response = await fetch(`${SERVER_URL}/data`);
+    const response = await fetch(APIRoute.GET);
     if (!response.ok) {
       throw new ErrorApi(`Ошибка сервера: ${response.status}`, response.status);
     }
@@ -16,7 +21,7 @@ const getPosts = async () => {
 
 const sendNewPost = async (formData) => {
   try {
-    const response = await fetch(`${SERVER_URL}`, {
+    const response = await fetch(APIRoute.POST, {
       method: 'POST',
       body: formData
     });
