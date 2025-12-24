@@ -1,5 +1,5 @@
-.img-upload__field--invalid .text__hashtags,
-.img-upload__field--invalid .text__description {
+.input--invalid .text__hashtags,
+.input--invalid .text__description {
   margin-bottom: 0;
   border: 2px solid red;
 }

@@ -6,8 +6,8 @@ const descriptionField = formUploadImg.querySelector('.text__description');
 
 const pristine = new Pristine(formUploadImg, {
   classTo: 'img-upload__field-wrapper',
-  errorClass: 'img-upload__field--invalid',
-  successClass: 'img-upload__field--valid',
+  errorClass: 'input--invalid',
+  successClass: 'input--valid',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'span',
   errorTextClass: 'form__error'
