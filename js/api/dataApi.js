@@ -3,13 +3,13 @@ import ErrorApi from './errorApi.js';
 const baseApiUrl = 'https://29.javascript.htmlacademy.pro/kekstagram';
 
 const APIRoute = {
-  GET: `${baseApiUrl}/data`,
-  POST: `${baseApiUrl}/`,
+  GET_POSTS: `${baseApiUrl}/data`,
+  SEND_POST: `${baseApiUrl}/`,
 };
 
 const getPosts = async () => {
   try {
-    const response = await fetch(APIRoute.GET);
+    const response = await fetch(APIRoute.GET_POSTS);
     if (!response.ok) {
       throw new ErrorApi(`Ошибка сервера: ${response.status}`, response.status);
     }
@@ -19,9 +19,9 @@ const getPosts = async () => {
   }
 };
 
-const sendNewPost = async (formData) => {
+const sendForm = async (formData) => {
   try {
-    const response = await fetch(APIRoute.POST, {
+    const response = await fetch(APIRoute.SEND_POST, {
       method: 'POST',
       body: formData
     });
@@ -34,7 +34,5 @@ const sendNewPost = async (formData) => {
     throw new ErrorApi(`Не удалось отправить данные: ${e.message}`, null);
   }
 };
-
-const sendForm = async (formData) => sendNewPost(formData);
 
 export { getPosts, sendForm };

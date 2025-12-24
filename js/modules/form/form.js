@@ -5,9 +5,9 @@ import {
   EFFECTS,
   DEFAULT_CONFIG_UISLIDER
 } from '../data/constants.js';
-import {createScaleController} from '../imageEditor/imageScale.js';
-import {sendForm} from '../../api/dataApi.js';
-import {hideLoadingMessage, showFailureMessage, showLoadingMessage, showSuccessMessage} from '../notify/message.js';
+import { createScaleController } from '../imageEditor/imageScale.js';
+import { sendForm } from '../../api/dataApi.js';
+import { hideLoadingMessage, showFailureMessage, showLoadingMessage, showSuccessMessage } from '../notify/message.js';
 
 const formUploadImg = document.querySelector('#upload-select-image');
 const uploadFile = formUploadImg.querySelector('#upload-file');
