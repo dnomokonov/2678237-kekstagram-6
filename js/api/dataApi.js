@@ -35,8 +35,6 @@ const sendNewPost = async (formData) => {
   }
 };
 
-const sendForm = async (formData) => {
-  return sendNewPost(formData);
-};
+const sendForm = async (formData) => sendNewPost(formData);
 
 export { getPosts, sendForm };
