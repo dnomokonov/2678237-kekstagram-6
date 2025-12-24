@@ -1415,9 +1415,8 @@ main {
 .alert {
   min-width: 200px;
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translate(-50%, -40px);
+  top: 15px;
+  transform: translate(0, 0);
   z-index: 1;
 
   display: flex;
@@ -1444,7 +1443,7 @@ main {
 .alert-show {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, 0);
+  transform: translate(20%, 0);
 }
 
 .alert--error {
